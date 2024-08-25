@@ -1,24 +1,19 @@
-const { DataTypes } = require("sequelize");
-const sequelize = require("../utils/database");
 
-const Appointment = sequelize.define("Appointment", {
-  id: {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
-    primaryKey: true,
-  },
-  patientId: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-  providerId: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-  appointmentTime: {
-    type: DataTypes.DATE,
-    allowNull: false,
-  },
-});
+/**
+ * Represents the schema for an Appointment in DynamoDB.
+ */
+const AppointmentSchema = {
+    TableName: 'Appointment',
+    KeySchema: [
+        { AttributeName: 'appointmentID', KeyType: 'HASH' } // Partition key
+    ],
+    AttributeDefinitions: [
+        { AttributeName: 'appointmentID', AttributeType: 'S' }
+    ],
+    ProvisionedThroughput: {
+        ReadCapacityUnits: 5,
+        WriteCapacityUnits: 5,
+    },
+};
 
-module.exports = Appointment;
+module.exports = AppointmentSchema;

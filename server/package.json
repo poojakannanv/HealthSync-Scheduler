@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "@aws-sdk/client-chime": "^3.637.0",
+    "@aws-sdk/client-chime-sdk-meetings": "^3.637.0",
     "@emotion/react": "^11.13.0",
     "@emotion/styled": "^11.13.0",
     "@mui/icons-material": "^5.16.7",
@@ -12,9 +14,10 @@
     "array-flatten": "^1.1.1",
     "asynckit": "^0.4.0",
     "available-typed-arrays": "^1.0.7",
-    "aws-sdk": "^2.1673.0",
+    "aws-sdk": "^2.1682.0",
     "axios": "^1.7.3",
     "base64-js": "^1.5.1",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
     "buffer": "^4.9.2",
     "bytes": "^3.1.2",
@@ -24,6 +27,7 @@
     "content-type": "^1.0.5",
     "cookie": "^0.6.0",
     "cookie-signature": "^1.0.6",
+    "cors": "^2.8.5",
     "debug": "^2.6.9",
     "define-data-property": "^1.1.4",
     "delayed-stream": "^1.0.0",
@@ -38,6 +42,7 @@
     "etag": "^1.8.1",
     "events": "^1.1.1",
     "express": "^4.19.2",
+    "express-validator": "^7.2.0",
     "finalhandler": "^1.2.0",
     "follow-redirects": "^1.15.6",
     "for-each": "^0.3.3",
@@ -63,12 +68,14 @@
     "is-typed-array": "^1.1.13",
     "isarray": "^1.0.0",
     "jmespath": "^0.16.0",
+    "jsonwebtoken": "^9.0.2",
     "media-typer": "^0.3.0",
     "merge-descriptors": "^1.0.1",
     "methods": "^1.1.2",
     "mime": "^1.6.0",
     "mime-db": "^1.52.0",
     "mime-types": "^2.1.35",
+    "mongoose": "^8.5.3",
     "ms": "^2.0.0",
     "mysql2": "^3.11.0",
     "negotiator": "^0.6.3",
@@ -102,16 +109,20 @@
     "url": "^0.10.3",
     "util": "^0.12.5",
     "utils-merge": "^1.0.1",
-    "uuid": "^8.0.0",
+    "uuid": "^8.3.2",
     "vary": "^1.1.2",
     "which-typed-array": "^1.1.15",
     "xml2js": "^0.6.2",
     "xmlbuilder": "^11.0.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/index.js"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
 }
