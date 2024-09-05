@@ -1,7 +1,7 @@
 
 const express = require('express');
 const { body } = require('express-validator');
-const { registerAdmin, getAdminProfile, updateAdminProfile, deleteAdminProfile } = require('../controllers/adminController');
+const { registerAdmin, getAdminProfile, updateAdminProfile, deleteAdminProfile , listAllUsers} = require('../controllers/adminController');
 const authMiddleware = require('../middlewares/authMiddleware');
 
 const router = express.Router();
@@ -28,5 +28,8 @@ router.put('/:id', authMiddleware, updateAdminProfile);
 // @route   DELETE /api/admin/:id
 // @desc    Delete Admin profile
 router.delete('/:id', authMiddleware, deleteAdminProfile);
+
+// Route to list all users
+router.get("/users", authMiddleware, listAllUsers);
 
 module.exports = router;

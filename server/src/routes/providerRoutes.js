@@ -6,6 +6,8 @@ const {
     getProviderProfile,
     updateProviderProfile,
     deleteProviderProfile,
+   
+    
 } = require('../controllers/providerController');
 const authMiddleware = require('../middlewares/authMiddleware');
 
@@ -40,5 +42,7 @@ router.put('/:id', authMiddleware, updateProviderProfile);
 // @route   DELETE /api/provider/:id
 // @desc    Delete Provider profile (Admin only)
 router.delete('/:id', authMiddleware, deleteProviderProfile);
+
+
 
 module.exports = router;

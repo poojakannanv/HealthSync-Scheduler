@@ -27,7 +27,7 @@ const registerPatient = async (req, res, next) => {
         medicalHistory,
         currentMedication,
     } = req.body;
-
+    const role = 'PATIENT'; // Ensure role is set here
     try {
         // Check if the patient email already exists
         const params = {
@@ -81,6 +81,7 @@ const registerPatient = async (req, res, next) => {
         res.status(201).json({
             message: 'Patient registered successfully',
             patientID,
+            role,
             token,
         });
     } catch (error) {
@@ -229,9 +230,11 @@ const deletePatientProfile = async (req, res, next) => {
     }
 };
 
+
 module.exports = {
     registerPatient,
     getPatientProfile,
     updatePatientProfile,
     deletePatientProfile,
+ 
 };

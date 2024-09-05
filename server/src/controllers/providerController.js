@@ -38,6 +38,9 @@ const registerProvider = async (req, res, next) => {
         availabilityStatus,
     } = req.body;
 
+    const role = 'PROVIDER'; // Ensure role is set here
+
+
     // Ensure provider email ends with '@healthsync.com'
     if (!email.endsWith('@healthsync.com')) {
         return res.status(400).json({ message: 'Email must end with @healthsync.com' });
@@ -101,6 +104,7 @@ const registerProvider = async (req, res, next) => {
         res.status(201).json({
             message: 'Provider registered successfully',
             providerID,
+            role,
             token,
         });
     } catch (error) {
@@ -268,6 +272,7 @@ const deleteProviderProfile = async (req, res, next) => {
         next(error);
     }
 };
+
 
 module.exports = {
     registerProvider,

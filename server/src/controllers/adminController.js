@@ -17,6 +17,8 @@ const registerAdmin = async (req, res, next) => {
 
   const { name, email, password, phoneNumber, address, DOB, gender } = req.body;
 
+  const role = 'ADMIN'; // Ensure role is set here
+
   try {
     // Check if the admin email already exists
     const params = {
@@ -70,6 +72,7 @@ const registerAdmin = async (req, res, next) => {
     res.status(201).json({
       message: "Admin registered successfully",
       adminID, // Return the adminID in the response
+      role,
       token,
     });
   } catch (error) {
@@ -199,9 +202,62 @@ const deleteAdminProfile = async (req, res, next) => {
   }
 };
 
+/**
+ * @desc    List all users from Admin, Provider, and Patient tables
+ * @route   GET /api/admin/users
+ * @access  Private/Admin
+ */
+const scanTable = async (params) => {
+  let items = [];
+  let data;
+
+  do {
+    data = await dynamoDB.scan(params).promise();
+    items = items.concat(data.Items);
+    params.ExclusiveStartKey = data.LastEvaluatedKey;
+  } while (typeof data.LastEvaluatedKey !== "undefined");
+
+  return items;
+};
+
+const listAllUsers = async (req, res, next) => {
+  try {
+    // Fetch Admins
+    const adminParams = {
+      TableName: "Admin",
+    };
+    const admins = await scanTable(adminParams);
+
+    // Fetch Providers
+    const providerParams = {
+      TableName: "Provider",
+    };
+    const providers = await scanTable(providerParams);
+
+    // Fetch Patients
+    const patientParams = {
+      TableName: "Patient",
+    };
+    const patients = await scanTable(patientParams);
+
+    // Combine all results
+    const allUsers = [
+      ...admins.map((admin) => ({ ...admin, role: "ADMIN" })),
+      ...providers.map((provider) => ({ ...provider, role: "PROVIDER" })),
+      ...patients.map((patient) => ({ ...patient, role: "PATIENT" })),
+    ];
+
+    res.json(allUsers);
+  } catch (error) {
+    next(error);
+  }
+};
+
+
 module.exports = {
   registerAdmin,
   getAdminProfile,
   updateAdminProfile,
   deleteAdminProfile,
+   listAllUsers,
 };

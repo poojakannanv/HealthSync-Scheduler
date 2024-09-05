@@ -1,4 +1,3 @@
-// utils/providerHelper.js
 
 const dynamoDB = require('../config/dbConfig');
 

@@ -1,6 +1,7 @@
 
 const express = require('express');
 const dotenv = require('dotenv');
+const cors = require('cors');
 const adminRoutes = require('./routes/adminRoutes');
 const providerRoutes = require('./routes/providerRoutes');
 const patientRoutes = require('./routes/patientRoutes');
@@ -11,6 +12,9 @@ const errorHandler = require('./middlewares/errorHandler');
 dotenv.config();
 
 const app = express();
+
+// Enable CORS for all routes
+app.use(cors());
 
 // Middleware to parse JSON bodies
 app.use(express.json());
