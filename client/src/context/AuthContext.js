@@ -46,12 +46,10 @@ const AuthProvider = ({ children }) => {
 
     const { userID, role, token } = response.data;
 
-    // Store the token, role, and userID in localStorage
     localStorage.setItem('token', token);
     localStorage.setItem('role', role);
     localStorage.setItem('userID', userID);
 
-    // Fetch the user data based on the role
     let userResponse;
     if (role === 'ADMIN') {
       userResponse = await api.get(`/admin/${userID}`);
@@ -69,19 +67,16 @@ const AuthProvider = ({ children }) => {
 
     const { patientID, role, token } = response.data;
 
-    // Store the token, role, and patientID (as userID) in localStorage
     localStorage.setItem('token', token);
     localStorage.setItem('role', role);
     localStorage.setItem('userID', patientID);
 
-    // Fetch the patient data after registration
     const userResponse = await api.get(`/patient/${patientID}`);
 
     setUser(userResponse.data);
   };
 
   const logout = () => {
-    // Clear the stored user data and token
     localStorage.removeItem('token');
     localStorage.removeItem('role');
     localStorage.removeItem('userID');

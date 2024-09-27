@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Button,
   TextField,
@@ -10,15 +10,32 @@ import {
   Card,
   CardContent,
   CircularProgress,
+  Autocomplete,
 } from '@mui/material';
 import axios from 'axios';
 
 const BookAppointment = () => {
   const [preferredDate, setPreferredDate] = useState('');
+  const [preferredTime, setPreferredTime] = useState('');
   const [appointmentType, setAppointmentType] = useState('');
   const [specialization, setSpecialization] = useState('');
+  const [providers, setProviders] = useState([]);
+  const [selectedProvider, setSelectedProvider] = useState(null);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    const fetchProviders = async () => {
+      const response = await axios.get('/api/providers', {
+        params: { specialization }
+      });
+      setProviders(response.data.providers);
+    };
+
+    if (specialization) {
+      fetchProviders();
+    }
+  }, [specialization]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -36,8 +53,10 @@ const BookAppointment = () => {
         body: JSON.stringify({
           patientID: patientID,
           preferredDate: preferredDate,
+          preferredTime: preferredTime,
           appointmentType: appointmentType,
           specialization: specialization,
+          providerID: selectedProvider ? selectedProvider.providerID : null,
         }),
       });
 
@@ -82,6 +101,17 @@ const BookAppointment = () => {
           </FormControl>
 
           <FormControl fullWidth style={{ marginBottom: '15px' }}>
+            <TextField
+              label="Preferred Time"
+              type="time"
+              InputLabelProps={{ shrink: true }}
+              value={preferredTime}
+              onChange={(e) => setPreferredTime(e.target.value)}
+              required
+            />
+          </FormControl>
+
+          <FormControl fullWidth style={{ marginBottom: '15px' }}>
             <InputLabel id="appointment-type-label">Appointment Type</InputLabel>
             <Select
               labelId="appointment-type-label"
@@ -107,6 +137,21 @@ const BookAppointment = () => {
               <MenuItem value="General Practice">General Practice</MenuItem>
               {/* Add more specializations as needed */}
             </Select>
+          </FormControl>
+
+          <FormControl fullWidth style={{ marginBottom: '15px' }}>
+            <Autocomplete
+              options={providers}
+              getOptionLabel={(option) => `${option.name} (${option.distance} km away)`}
+              onChange={(event, newValue) => setSelectedProvider(newValue)}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="Select Provider"
+                  placeholder="Select provider based on location"
+                />
+              )}
+            />
           </FormControl>
 
           <Button

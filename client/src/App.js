@@ -13,7 +13,6 @@ import "./App.css";
 function App() {
   const { user } = useContext(AuthContext);
 
-  // Function to render the appropriate dashboard based on the user's role
   const renderDashboard = () => {
     if (!user) return null;
 

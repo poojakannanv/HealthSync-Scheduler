@@ -75,15 +75,13 @@ const RegisterPatient = () => {
           },
         });
         console.log("Patient registered successfully");
-        // Redirect or show a success message
-        navigate("/dashboard"); // Redirect to the dashboard after successful login
+        navigate("/dashboard"); 
       } catch (error) {
         console.error("Error registering patient:", error);
       }
     }
   };
 
-  // If the user is already logged in, redirect to the dashboard
   if (user) {
     return <Navigate to="/dashboard" />;
   }

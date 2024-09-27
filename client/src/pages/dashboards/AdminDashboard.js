@@ -11,11 +11,9 @@ import Header from "../../components/landing/Header";
 import Footer from "../../components/landing/Footer";
 import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import PersonIcon from "@mui/icons-material/Person";
 
-import UserManagement from "../../components/adminDashboard/UserManagement";
+import ProvidersList from "../../components/adminDashboard/ProvidersList";
 import CreateProvider from "../../components/adminDashboard/CreateProvider";
-import ProfileManagement from "../../components/adminDashboard/ProfileManagement";
 
 const drawerWidth = 240;
 
@@ -31,11 +29,9 @@ const AdminDashboard = () => {
       case "CreateProvider":
         return <CreateProvider />;
       case "Users":
-        return <UserManagement />;
-      case "Profile":
-        return <ProfileManagement />;
+        return <ProvidersList />;
       default:
-        return <UserManagement />;
+        return <ProvidersList />;
     }
   };
 
@@ -58,7 +54,7 @@ const AdminDashboard = () => {
           <List>
             <ListItem
               button
-              selected={selectedSection === "CreateProvider"} // Add the new list item
+              selected={selectedSection === "CreateProvider"} 
               onClick={() => handleListItemClick("CreateProvider")}
             >
               <ListItemIcon>
@@ -74,18 +70,9 @@ const AdminDashboard = () => {
               <ListItemIcon>
                 <SupervisorAccountIcon />
               </ListItemIcon>
-              <ListItemText primary="User Management" />
+              <ListItemText primary="Providers List" />
             </ListItem>
-            <ListItem
-              button
-              selected={selectedSection === "Profile"}
-              onClick={() => handleListItemClick("Profile")}
-            >
-              <ListItemIcon>
-                <PersonIcon />
-              </ListItemIcon>
-              <ListItemText primary="Profile Management" />
-            </ListItem>
+           
           </List>
         </Drawer>
         <Box sx={{ flexGrow: 1, padding: 3 }}>{renderSectionContent()}</Box>

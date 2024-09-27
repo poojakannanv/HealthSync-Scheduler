@@ -21,13 +21,12 @@ const Login = () => {
   const onSubmit = async (data) => {
     try {
       await login(data.email, data.password);
-      navigate("/dashboard"); // Redirect to the dashboard after successful login
+      navigate("/dashboard"); 
     } catch (err) {
       setError("Invalid credentials");
     }
   };
 
-  // If the user is already logged in, redirect to the dashboard
   if (user) {
     return <Navigate to="/dashboard" />;
   }

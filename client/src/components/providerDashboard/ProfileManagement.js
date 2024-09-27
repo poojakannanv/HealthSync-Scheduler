@@ -1,16 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { Typography, CircularProgress, Box, Card, CardContent, Grid, Avatar } from "@mui/material";
-import api from "../../services/api"; // Import the configured Axios instance
+import {
+  Typography,
+  CircularProgress,
+  Box,
+  Card,
+  CardContent,
+  Grid,
+  Avatar,
+} from "@mui/material";
+import api from "../../services/api"; 
 
 const ProfileManagement = () => {
-  const [profile, setProfile] = useState(null);
+  const [profile, setProfile] = useState();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        // Replace this with the actual provider ID or retrieve it from the context/local storage
+       
         const providerID = localStorage.getItem("userID");
 
         const response = await api.get(`/provider/${providerID}`);
@@ -74,10 +82,13 @@ const ProfileManagement = () => {
                   <strong>Consultation Fee:</strong> ${profile.consultationFee}
                 </Typography>
                 <Typography variant="body1">
-                  <strong>Address:</strong> {profile.address.street}, {profile.address.city}, {profile.address.postalCode}, {profile.address.country}
+                  <strong>Address:</strong> {profile.address.street},{" "}
+                  {profile.address.city}, {profile.address.postalCode},{" "}
+                  {profile.address.country}
                 </Typography>
                 <Typography variant="body1">
-                  <strong>Availability Status:</strong> {profile.availabilityStatus}
+                  <strong>Availability Status:</strong>{" "}
+                  {profile.availabilityStatus}
                 </Typography>
               </Grid>
             </Grid>

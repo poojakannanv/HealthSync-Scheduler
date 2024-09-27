@@ -34,7 +34,4 @@ router.put('/:id', authMiddleware, updatePatientProfile);
 // @desc    Delete Patient profile (Admin only)
 router.delete('/:id', authMiddleware, deletePatientProfile);
 
-
-
-
 module.exports = router;

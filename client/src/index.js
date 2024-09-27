@@ -4,14 +4,14 @@ import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './styles/theme';
 import App from './App';
-import { AuthProvider } from './context/AuthContext';  // Import the AuthProvider
+import { AuthProvider } from './context/AuthContext';  
 import "./index.css"
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <ThemeProvider theme={theme}>
-      <AuthProvider>  {/* Wrap the application with AuthProvider */}
+      <AuthProvider>  
         <App />
       </AuthProvider>
     </ThemeProvider>

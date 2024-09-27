@@ -6,7 +6,7 @@ import {
   Typography,
   Container,
 } from "@mui/material";
-import api from "../../services/api"; // Import the configured Axios instance
+import api from "../../services/api"; 
 
 const CreateProvider = () => {
   const [formData, setFormData] = useState({
@@ -92,7 +92,6 @@ const CreateProvider = () => {
         const response = await api.post("/provider/register", data);
         setSuccessMessage("Provider registered successfully!");
         console.log("Provider registered successfully:", response.data);
-        // Optionally, you could redirect or clear the form here
       } catch (error) {
         console.error("Error registering provider:", error);
         setErrors({ apiError: "Failed to register provider" });

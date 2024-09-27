@@ -10,7 +10,7 @@ const Header = () => {
 
   const handleLogout = () => {
     logout();
-    navigate("/"); // Redirect to the landing page after logout
+    navigate("/"); 
   };
 
   return (

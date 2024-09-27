@@ -6,7 +6,7 @@ const {
     getProviderProfile,
     updateProviderProfile,
     deleteProviderProfile,
-   
+    getAllProviders,
     
 } = require('../controllers/providerController');
 const authMiddleware = require('../middlewares/authMiddleware');
@@ -43,6 +43,7 @@ router.put('/:id', authMiddleware, updateProviderProfile);
 // @desc    Delete Provider profile (Admin only)
 router.delete('/:id', authMiddleware, deleteProviderProfile);
 
-
+// route for getting all providers
+router.get('/', authMiddleware, getAllProviders); 
 
 module.exports = router;

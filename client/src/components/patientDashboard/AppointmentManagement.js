@@ -41,7 +41,7 @@ const AppointmentManagement = () => {
 
       const response = await axios.request(config);
 
-      setAppointments(JSON.parse(response.data.body)); // Parse the JSON string in the response body
+      setAppointments(JSON.parse(response.data.body));
       setLoading(false);
     } catch (err) {
       console.error("Error fetching appointments:", err);

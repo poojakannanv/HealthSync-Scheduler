@@ -273,10 +273,38 @@ const deleteProviderProfile = async (req, res, next) => {
     }
 };
 
+/**
+ * @desc    Get all Providers (Admin only)
+ * @route   GET /api/provider
+ * @access  Private/Admin
+ */
+const getAllProviders = async (req, res, next) => {
+    // Ensure only admin can view all providers
+    if (req.user.role !== 'ADMIN') {
+        return res.status(403).json({ message: 'Access denied' });
+    }
+
+    try {
+        const params = {
+            TableName: 'Provider',
+        };
+
+        const providers = await dynamoDB.scan(params).promise();
+
+        if (providers.Items.length === 0) {
+            return res.status(404).json({ message: 'No providers found' });
+        }
+
+        res.json(providers.Items);
+    } catch (error) {
+        next(error);
+    }
+};
 
 module.exports = {
     registerProvider,
     getProviderProfile,
     updateProviderProfile,
     deleteProviderProfile,
+    getAllProviders
 };
