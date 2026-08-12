@@ -18,6 +18,34 @@ HealthSync Scheduler lets patients find nearby healthcare providers, book appoin
 - **Automated patient notifications** - AWS SES (email) and SNS (SMS) send booking confirmations and appointment reminders without manual intervention
 - **Serverless architecture** - all business logic in AWS Lambda functions behind API Gateway, with DynamoDB as the data store; no servers to provision or patch
 
+## Screenshots
+
+### Landing page
+
+![Landing page](screenshots/01-landing.png)
+
+### Authentication
+
+| Login | Patient registration |
+|---|---|
+| ![Login](screenshots/02-login.png) | ![Register](screenshots/03-register.png) |
+
+### Role-based dashboards
+
+**Admin — register and manage providers**
+
+![Admin dashboard](screenshots/04-dashboard-admin.png)
+
+**Provider — profile management**
+
+![Provider dashboard](screenshots/05-dashboard-doctor.png)
+
+**Patient — profile and health resources**
+
+| Profile management | Health tips & resources |
+|---|---|
+| ![Patient profile](screenshots/06-dashboard-patient-profile.png) | ![Health tips](screenshots/07-dashboard-patient-healthtips.png) |
+
 ## Architecture
 
 ```
